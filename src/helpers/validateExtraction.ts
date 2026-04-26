@@ -8,6 +8,7 @@ export function validateExtraction(data: unknown): data is CallExtraction {
         typeof d.clinical === 'object' &&
         Array.isArray((d.clinical as any).symptoms) &&
         typeof d.confidence === 'number' &&
-        typeof d.recommended_action === 'object'
+        typeof d.recommended_action === 'object' &&
+        typeof d.is_valid_call === 'boolean'
     );
 }

@@ -19,5 +19,10 @@
             "mode": "gp_consultation|nurse_consultation|emergency|other"
         }
     }
-    Handle missing information gracefully by using null. Be conservative with urgency assessment.`
+    Handle missing information gracefully by using null, and 'unknown' for enums.
+    For symptoms, capture exactly what the patient describes. Do not infer or expand vague complaints 
+        -- e.g. "I feel unwell" should be recorded as ["feeling unwell"], not ["nausea", "fatigue"].
+    Set is_valid_call to false if the transcript is not a patient call 
+        -- e.g. random noise, wrong number, or completely off-topic content.
+    Be conservative with urgency assessment.`
 

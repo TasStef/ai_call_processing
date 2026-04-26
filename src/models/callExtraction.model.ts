@@ -7,5 +7,6 @@ export interface CallExtraction {
     intent: Intent | null;
     confidence: number;
     recommended_action: { type: string; mode: string };
+    is_valid_call: boolean;
 }
 

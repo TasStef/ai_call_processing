@@ -3,7 +3,6 @@ import {aiService} from '../../services/ai.service';
 import Ajv from 'ajv';
 import {callExtractionSchema} from '../../models/callExtraction.schema';
 
-// AJV instance reused for performance
 const ajv = new Ajv({allErrors: true, strict: false});
 const validate = ajv.compile(callExtractionSchema);
 
@@ -26,7 +25,8 @@ async function processCallPost(req: Request, res: Response) {
             try {
                 const repairHint = `${transcript}\n\nReturn ONLY JSON that strictly matches the provided schema. No explanations, no markdown.`;
                 const retry = await aiService.processTranscript(repairHint);
-                if (validate(retry)) {
+
+                if (validate(retry) && result.is_valid_call) {
                     return res.status(200).json(retry);
                 }
             } catch (_e) {
@@ -37,6 +37,10 @@ async function processCallPost(req: Request, res: Response) {
                 error: 'Invalid AI output',
                 details: ajv.errorsText(validate.errors ?? [], {separator: '; '}),
             });
+        }
+
+        if (!result.is_valid_call) {
+            return res.status(400).json({error: 'Transcript does not appear to be a valid patient call'});
         }
 
         return res.status(200).json(result);

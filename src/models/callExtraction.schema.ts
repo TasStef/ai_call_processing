@@ -38,6 +38,7 @@ export const callExtractionSchema = {
             },
             required: ['type', 'mode'],
         },
+        is_valid_call: { type: 'boolean' },
     },
     required: ['patient', 'clinical', 'intent', 'confidence', 'recommended_action'],
 };
