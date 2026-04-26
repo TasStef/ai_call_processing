@@ -33,7 +33,7 @@ export const callExtractionSchema = {
             type: 'string',
             enum: Object.values(Intent),
         },
-        confidence: {type: 'number', minimum: 0, maximum: 1},
+        confidence: {type: 'number'},
         recommended_action: {
             type: 'object',
             additionalProperties: false,
