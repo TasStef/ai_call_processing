@@ -10,7 +10,12 @@ export const callExtractionSchema = {
             additionalProperties: false,
             properties: {
                 name: {type: ['string', 'null']},
-                date_of_birth: {type: ['string', 'null']},
+                date_of_birth: {
+                    anyOf: [
+                        {type: 'null'},
+                        {type: 'string', pattern: '^\\d{4}-\\d{2}-\\d{2}$'}
+                    ]
+                },
             },
             required: ['name', 'date_of_birth'],
         },
@@ -28,7 +33,7 @@ export const callExtractionSchema = {
             type: 'string',
             enum: Object.values(Intent),
         },
-        confidence: {type: 'number'},
+        confidence: {type: 'number', minimum: 0, maximum: 1},
         recommended_action: {
             type: 'object',
             additionalProperties: false,
@@ -38,7 +43,7 @@ export const callExtractionSchema = {
             },
             required: ['type', 'mode'],
         },
-        is_valid_call: { type: 'boolean' },
+        is_valid_call: {type: 'boolean'},
     },
     required: ['patient', 'clinical', 'intent', 'confidence', 'recommended_action'],
 };
