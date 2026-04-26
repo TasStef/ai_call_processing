@@ -1,7 +1,7 @@
+import 'dotenv/config';
 import express, {Request, Response, NextFunction} from 'express';
 import {pingRouter} from "./routes/ping/ping.router";
 import {processCallRouter} from "./routes/processCall/processCall.router";
-import 'dotenv/config';
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
