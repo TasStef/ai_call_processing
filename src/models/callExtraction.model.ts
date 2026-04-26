@@ -3,8 +3,8 @@ import {Intent} from "../enums/intent.enum";
 
 export interface CallExtraction {
     patient: { name: string | null; date_of_birth: string | null };
-    clinical: { symptoms: string[]; duration: string | null; urgency: Urgency };
-    intent: Intent;
+    clinical: { symptoms: string[]; duration: string | null; urgency: Urgency | null };
+    intent: Intent | null;
     confidence: number;
     recommended_action: { type: string; mode: string };
 }

@@ -1,5 +1,6 @@
 ﻿export enum Urgency {
     routine = 'routine',
     urgent = 'urgent',
-    emergency = 'emergency'
+    emergency = 'emergency',
+    unknown = 'unknown',
 }
